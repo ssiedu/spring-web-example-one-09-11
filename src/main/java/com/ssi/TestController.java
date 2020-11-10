@@ -10,4 +10,9 @@ public class TestController {
 	public void testingMethod() {
 		System.out.println("hello from a handler method for test request ................>>>>>");
 	}
+	
+	@RequestMapping("/demo")
+	public void demoMethod() {
+		System.out.println("hello from a handler method for demo request ------------------>>>>");
+	}
 }
