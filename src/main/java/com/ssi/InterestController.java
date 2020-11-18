@@ -16,37 +16,24 @@ public class InterestController {
 	
 	@Autowired
 	private InterestService service;
-	
+		
 	@RequestMapping("input")	
 	public String showInputPage() {
-		//this method will return the view-name to front-controller
+		//this method will return the view-name to front-controller (DispacherServlet)
 		return "inputpage.jsp";
 		
 	}
 	
 	@RequestMapping("computeinterest")
-	public void processRequestForInterest(@RequestParam("t1") int amount, @RequestParam("t2") int time, HttpServletResponse response) {
-		//this method will be called on submission of inputpage
-		//this method will read the request.
-		//int amount=Integer.parseInt(request.getParameter("t1"));
-		//int time=Integer.parseInt(request.getParameter("t2"));
-		//process the request
-		
+	public String processRequestForInterest(@RequestParam("t1") int amount, @RequestParam("t2") int time, HttpServletRequest request) {
+			
 		InterestModel model=service.computeInterest(amount, time);
 		
-		//provide the response
-		try {
-			PrintWriter out=response.getWriter();
-			out.println("Amount : "+model.getAmount());
-			out.println("Time   : "+model.getTime());
-			out.println("Intr   : "+model.getInterest());
-			out.println("Net    : "+model.getNet());
-			out.close();
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		//controller stores the process data in scope objects (request/session) so that view can access that from scope object
+		
+		request.setAttribute("data", model);
+		
+		return "result.jsp";
 		
 	}
 	
