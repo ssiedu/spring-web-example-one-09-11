@@ -29,6 +29,10 @@ public class InterestModel {
 	public void setNet(int net) {
 		this.net = net;
 	}
+	@Override
+	public String toString() {
+		return "InterestModel [amount=" + amount + ", time=" + time + ", interest=" + interest + ", net=" + net + "]";
+	}
 	
 	
 }

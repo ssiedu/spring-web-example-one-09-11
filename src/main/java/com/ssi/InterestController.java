@@ -1,15 +1,10 @@
 package com.ssi;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class InterestController {
@@ -25,16 +20,14 @@ public class InterestController {
 	}
 	
 	@RequestMapping("computeinterest")
-	public String processRequestForInterest(@RequestParam("t1") int amount, @RequestParam("t2") int time, HttpServletRequest request) {
-			
-		InterestModel model=service.computeInterest(amount, time);
+	public ModelAndView processRequestForInterest(@ModelAttribute("data") InterestModel model) {
 		
-		//controller stores the process data in scope objects (request/session) so that view can access that from scope object
+		service.computeInterest(model);
 		
-		request.setAttribute("data", model);
+		ModelAndView mv=new ModelAndView("result.jsp");
+		mv.addObject("author", "manoj");
 		
-		return "result.jsp";
-		
+		return mv;
 	}
 	
 }

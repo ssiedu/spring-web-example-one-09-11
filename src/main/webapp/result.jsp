@@ -2,7 +2,7 @@
 
 <html>
 <body>
-	<h3>Interest-Details</h3>
+	<h3>Interest-Details-By-${author}</h3>
 	<hr>
 		<pre>
 		Amount)		:	${data.amount}
